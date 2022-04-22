@@ -1,0 +1,37 @@
+<h1>{{title}}</h1>
+<form>
+    <div class="form-group  col-md-3">
+      <label>Search by Price</label>
+      <input type="text" name="input" [(ngModel)]="priceMax" class="form-control">
+    </div>
+  </form>  
+<table class="table">
+    <thead>
+        <tr>
+<th>Title</th>
+<th>price</th>
+<th>quantite</th>
+<th>image</th>
+<th>likes</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let product of list">
+<tr *ngIf="product.price<=priceMax || priceMax==null ||  priceMax==0">
+<td>{{product.title}}</td>
+<td>{{product.price}}</td>
+<td>{{product.quantite}}</td>
+<td><img src="{{product.image}}"></td>
+<td>
+    <button class="btn btn-sm btn-primary"
+    (click)="incrementLike(product)" style="height: 40px;">{{product.like}}</button>
+</td>
+<td>
+    <button [disabled]="product.quantite==0" class="btn btn-sm btn-primary"
+    style="margin-right: 10px; height: 40px;"
+    (click)="buyProduct(product)">buy product</button>
+    <button  class="btn  btn-danger" style="height: 40px;"
+    (click)="deleteProduct(product)">delete product</button>
+</td>
+</tr>
+    </tbody>
+</table>
